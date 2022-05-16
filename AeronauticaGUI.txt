@@ -83,10 +83,18 @@ local function DrawDrop(drop)
 
                             Airport.Position  = Vector2.new(dropvector.X, dropvector.Y + 37)
 
-                            local IslandString = drop.Parent.Name
-                            if string.find(IslandString, " Crates") then
-                                IslandString = string.gsub(drop.Parent.Name,' Crates','')
-                            elseif IslandString == nil then
+                            local IslandString
+                            if drop.Parent then
+                                if drop.Parent.Name then
+                                    if string.find(drop.Parent.Name, " Crates") then
+                                        IslandString = string.gsub(drop.Parent.Name, " Crates", "")
+                                    else
+                                        IslandString = "Couldnt find Location"
+                                    end
+                                else
+                                    IslandString = "Couldnt find Location"
+                                end
+                            else
                                 IslandString = "Couldnt find Location"
                             end
 
@@ -194,31 +202,41 @@ local CollectCrates = Crates:CreateButton("Collect Crates", function()
             end
         end
 
-        for i,v in pairs(game:GetService("Workspace").GrandWorkspace.Scenery.KitCrates:GetDescendants()) do
-            if v.Name == "CratePart" and v.Transparency == 0 then
+        if plane.Specifications.Type.Value ~= "Ultralight" then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Warning";
+                Text = "Switch to an Ultralight for this!";
+                Button1 = "Understood";
+                Duration = math.huge
+            })
+        else
+            for i,v in pairs(game:GetService("Workspace").GrandWorkspace.Scenery.KitCrates:GetDescendants()) do
+                if v.Name == "CratePart" and v.Transparency == 0 then
 
-                plane.PrimaryPart.Anchored = false
-                wait(0.1)
-                plane:SetPrimaryPartCFrame(v.CFrame + Vector3.new(0, 0.25, 0))
-                wait(0.1)
-                plane.PrimaryPart.Anchored = true
-
-                spawn(function()
-                    repeat wait()
-                        plane.Engine.BodyVelocity.Velocity = Vector3.new(0, plane.Engine.BodyVelocity.Velocity.Y, 0)
-                    until v.Transparency == 1
-                end)
-
-                repeat wait()
                     plane.PrimaryPart.Anchored = false
                     wait(0.1)
+                    plane:SetPrimaryPartCFrame(v.CFrame + Vector3.new(0, 0.25, 0))
+                    wait(0.1)
                     plane.PrimaryPart.Anchored = true
-                until v.Transparency == 1
+
+                    spawn(function()
+                        repeat wait()
+                            plane.Engine.BodyVelocity.Velocity = Vector3.new(0, plane.Engine.BodyVelocity.Velocity.Y, 0)
+                        until v.Transparency == 1
+                    end)
+
+                    repeat wait()
+                        plane.PrimaryPart.Anchored = false
+                        wait(0.1)
+                        plane.PrimaryPart.Anchored = true
+                    until v.Transparency == 1
+                end
             end
+
+            plane.PrimaryPart.Anchored = false
+            plane:SetPrimaryPartCFrame(originalpos1)
         end
 
-        plane.PrimaryPart.Anchored = false
-        plane:SetPrimaryPartCFrame(originalpos1)
     end
 end)
 
@@ -226,6 +244,7 @@ end)
 local loopCrates = false
 local originalposLoopCrates;
 local planeLoopCrates;
+local LoopCratesBodyGyro;
 local LoopCollectCrates = Crates:CreateToggle("Collect Crates (loop)", function(state)
     if state == true then
         loopCrates = true
@@ -252,33 +271,41 @@ local LoopCollectCrates = Crates:CreateToggle("Collect Crates (loop)", function(
                 end
             end
 
-            repeat wait()
-                for i,v in pairs(game:GetService("Workspace").GrandWorkspace.Scenery.KitCrates:GetDescendants()) do
-                    if loopCrates == false then
-                    else
-                        if v.Name == "CratePart" and v.Transparency == 0 then
-                            planeLoopCrates.PrimaryPart.Anchored = false
-                            wait(0.1)
-                            planeLoopCrates:SetPrimaryPartCFrame(v.CFrame + Vector3.new(0, 0.25, 0))
-                            wait(0.1)
-                            planeLoopCrates.PrimaryPart.Anchored = true
-            
-                            spawn(function()
-                                repeat wait()
-                                    planeLoopCrates.Engine.BodyVelocity.Velocity = Vector3.new(0, planeLoopCrates.Engine.BodyVelocity.Velocity.Y, 0)
-                                until v.Transparency == 1
-                            end)
-            
-                            repeat wait()
+            if planeLoopCrates.Specifications.Type.Value ~= "Ultralight" then
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Warning";
+                    Text = "Switch to an Ultralight for this!";
+                    Button1 = "Understood";
+                    Duration = math.huge
+                })
+            else
+                LoopCratesBodyGyro = game:GetService("RunService").RenderStepped:Connect(function() 
+                    planeLoopCrates.Engine.BodyVelocity.Velocity = Vector3.new(0, planeLoopCrates.Engine.BodyVelocity.Velocity.Y, 0)
+                end)
+
+                repeat wait()
+                    for i,v in pairs(game:GetService("Workspace").GrandWorkspace.Scenery.KitCrates:GetDescendants()) do
+                        if loopCrates == false then
+                        else
+                            if v.Name == "CratePart" and v.Transparency == 0 then
+
                                 planeLoopCrates.PrimaryPart.Anchored = false
                                 wait(0.1)
+                                planeLoopCrates:SetPrimaryPartCFrame(v.CFrame + Vector3.new(0, 0.25, 0))
+                                wait(0.1)
                                 planeLoopCrates.PrimaryPart.Anchored = true
-                            until v.Transparency == 1
+                
+                                repeat wait()
+                                    planeLoopCrates.PrimaryPart.Anchored = false
+                                    wait(0.1)
+                                    planeLoopCrates.PrimaryPart.Anchored = true
+                                until v.Transparency == 1
+
+                            end
                         end
                     end
-                end
-            until loopCrates == false
-
+                until loopCrates == false
+            end
         end
     elseif state == false then
         if not planeLoopCrates then
@@ -287,13 +314,16 @@ local LoopCollectCrates = Crates:CreateToggle("Collect Crates (loop)", function(
             loopCrates = false
             planeLoopCrates.PrimaryPart.Anchored = false
             planeLoopCrates:SetPrimaryPartCFrame(originalposLoopCrates)
+            LoopCratesBodyGyro:Disconnect()
+            planeLoopCrates = nil
+            originalposLoopCrates = nil
         end
     end
 end)
 
 
 
-local TeleAirport = Teleports:CreateDropdown("Airport Teleports")
+local TeleAirport = Teleports:CreateDropdown("Airport/Location Teleports")
 for i, v in pairs(game:GetService("Workspace").GrandWorkspace.SpawnPoints:GetChildren()) do
     local AirportButton = TeleAirport:CreateDropdownButton(v.Name, function()
         local PlayerName = tostring(game.Players.LocalPlayer)
@@ -319,7 +349,7 @@ for i, v in pairs(game:GetService("Workspace").GrandWorkspace.SpawnPoints:GetChi
                 end
             end
 
-            plane:SetPrimaryPartCFrame(v.PrimaryPart.CFrame + Vector3.new(0, 1, 0))
+            plane:SetPrimaryPartCFrame(CFrame.new(Vector3.FromNormalId(Enum.NormalId.Top) + v.PrimaryPart.Position))
         end
     end)
 end
