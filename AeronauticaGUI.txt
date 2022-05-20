@@ -472,7 +472,7 @@ local TpToWaypointLoopHeightLock = Routes:CreateButton("Complete Supply Drop", f
     
                 repeat
                     amount = amount - 1
-                    wait(1.5)
+                    wait(2)
                     plane11.PrimaryPart.FlyScript.ServerMissionScript.Connector:FireServer()
                 until amount == 0
     
@@ -548,9 +548,12 @@ local LockPlane = misc:CreateToggle("Lock Plane", function(state)
     end
 end)
 
+
 local lineLockFarmMin = misc:CreateLine()
 
+
 local TextFarmMinutes = misc:CreateLabel("Takeoff first, then turn on")
+
 
 local oldpos250;
 local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
@@ -603,6 +606,63 @@ local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
         plane111.PrimaryPart.Anchored = false
         if oldpos250 ~= nil then
             plane111:SetPrimaryPartCFrame(oldpos250)
+        end
+    end
+end)
+
+
+local lineFarmMinFasterPlane = misc:CreateLine()
+
+
+local TextFasterPlane = misc:CreateLabel("Takeoff first, then turn on")
+
+
+local loopFasterPlane;
+local FasterPlane = misc:CreateToggle("Faster Plane", function(state)
+    local PlayerName = tostring(game.Players.LocalPlayer)
+    local plane;
+    if state then
+        local counter = 0
+
+        for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
+            counter = counter + 1
+        end
+
+        if counter == 1 then
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Info";
+                Text = "You need to be spawned in";
+                Button1 = "Understood";
+                Duration = math.huge
+            })
+        else
+            for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
+                if v.Name == "Head" then
+                else
+                    plane = v
+                end
+            end
+
+            local function calculate(speed)
+                local calc = speed / 14.45
+                return calc
+            end
+
+            local oldmaxspeed = plane.Specifications.MaxSpeed.Value
+
+            loopFasterPlane = game:GetService("RunService").RenderStepped:Connect(function()
+                plane.Specifications.MaxSpeed.Value = 10000
+                if plane.PrimaryPart.BodyVelocity.Velocity.X >= calculate(oldmaxspeed + oldmaxspeed / 1.55) then
+                elseif plane.PrimaryPart.BodyVelocity.Velocity.Y >= calculate(oldmaxspeed + oldmaxspeed / 1.7) then
+                elseif plane.PrimaryPart.BodyVelocity.Velocity.Z >= calculate(oldmaxspeed + oldmaxspeed / 1.55) then
+                else
+                    plane.PrimaryPart.BodyVelocity.Velocity = plane.PrimaryPart.BodyVelocity.Velocity * 1.07
+                end
+            end)
+        end
+    elseif not state then
+        if loopFasterPlane then
+            loopFasterPlane:Disconnect()
         end
     end
 end)
