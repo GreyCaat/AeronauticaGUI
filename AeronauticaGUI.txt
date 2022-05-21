@@ -217,7 +217,7 @@ end)
 
 local loopCrates = false
 local planeLoopCrates;
-local LoopCollectCrates = Crates:CreateToggle("AFK Collect Crates", function(state)
+local LoopCollectCrates = Crates:CreateToggle("Collect Crates", function(state)
     local PlayerName = tostring(game.Players.LocalPlayer)
     if state == true then
         loopCrates = true
