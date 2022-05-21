@@ -320,11 +320,11 @@ for i, v in pairs(game:GetService("Workspace").GrandWorkspace.SpawnPoints:GetChi
                 end
             end)
 
-            TweenFunctionV(275, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
+            TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
             
-            TweenFunctionV(275, plane.PrimaryPart, Vector3.new(v.PrimaryPart.Position.X, calculate(feetvalue), v.PrimaryPart.Position.Z))
+            TweenFunctionV(250, plane.PrimaryPart, Vector3.new(v.PrimaryPart.Position.X, calculate(feetvalue), v.PrimaryPart.Position.Z))
 
-            TweenFunctionV(275, plane.PrimaryPart, Vector3.FromNormalId(Enum.NormalId.Top) + v.PrimaryPart.Position)
+            TweenFunctionV(250, plane.PrimaryPart, Vector3.FromNormalId(Enum.NormalId.Top) + v.PrimaryPart.Position)
 
             loopTelAir:Disconnect()
         end
@@ -392,11 +392,11 @@ local loadpos = Teleports:CreateButton("Load Position", function()
             end
         end)
 
-        TweenFunctionV(275, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
+        TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
         
-        TweenFunctionV(275, plane.PrimaryPart, Vector3.new(pos.X, calculate(feetvalue), pos.Z))
+        TweenFunctionV(250, plane.PrimaryPart, Vector3.new(pos.X, calculate(feetvalue), pos.Z))
 
-        TweenFunctionV(275, plane.PrimaryPart, pos)
+        TweenFunctionV(250, plane.PrimaryPart, pos)
 
         loopTelAir:Disconnect()
     end
@@ -462,11 +462,11 @@ local TpToWaypoint = Routes:CreateButton("Tp to marker", function()
             end
         end)
 
-        TweenFunctionV(275, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
+        TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
         
-        TweenFunctionV(275, plane.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
+        TweenFunctionV(250, plane.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
 
-        TweenFunctionV(275, plane.PrimaryPart, game:GetService("Workspace").Junk.Guider.Position + Vector3.new(0, 1, 0))
+        TweenFunctionV(250, plane.PrimaryPart, game:GetService("Workspace").Junk.Guider.Position + Vector3.new(0, 1, 0))
 
         loopTelAir:Disconnect()
     end
@@ -543,10 +543,10 @@ local TpToWaypointLoop = Routes:CreateToggle("Tp to marker (loop)", function(sta
 
             local feetvalue = plane4.Specifications.ServiceCeiling.Value
 
-            TweenFunctionV(275, plane4.PrimaryPart, Vector3.new(plane4.PrimaryPart.Position.X, calculate(feetvalue), plane4.PrimaryPart.Position.Z))
+            TweenFunctionV(250, plane4.PrimaryPart, Vector3.new(plane4.PrimaryPart.Position.X, calculate(feetvalue), plane4.PrimaryPart.Position.Z))
 
             repeat game:GetService("RunService").RenderStepped:Wait()
-                TweenFunctionV(275, plane4.PrimaryPart, game:GetService("Workspace").Junk.Guider.Position)
+                TweenFunctionV(250, plane4.PrimaryPart, game:GetService("Workspace").Junk.Guider.Position)
             until toggleloopmarker == false
         end
     elseif not state then
@@ -560,9 +560,9 @@ local TpToWaypointLoop = Routes:CreateToggle("Tp to marker (loop)", function(sta
 
             local feetvalue = plane4.Specifications.ServiceCeiling.Value
 
-            TweenFunctionV(275, plane4.PrimaryPart, Vector3.new(originalpos4.X, calculate(feetvalue), originalpos4.Z))
+            TweenFunctionV(250, plane4.PrimaryPart, Vector3.new(originalpos4.X, calculate(feetvalue), originalpos4.Z))
 
-            TweenFunctionV(275, plane4.PrimaryPart, originalpos4)
+            TweenFunctionV(250, plane4.PrimaryPart, originalpos4)
 
             loopTelAir111:Disconnect()
         end
@@ -639,15 +639,15 @@ local TpToWaypointLoopHeightLock = Routes:CreateButton("Complete Supply Drop", f
                     end
                 end)
         
-                TweenFunctionV(275, plane11.PrimaryPart, Vector3.new(plane11.PrimaryPart.Position.X, calculate(feetvalue), plane11.PrimaryPart.Position.Z))
+                TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(plane11.PrimaryPart.Position.X, calculate(feetvalue), plane11.PrimaryPart.Position.Z))
                 
                 repeat
-                    TweenFunctionV(275, plane11.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
+                    TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
                     wait()
                     plane11.PrimaryPart.FlyScript.ServerMissionScript.Connector:FireServer()
                 until plane11.PrimaryPart.FlyScript.ServerMissionScript.Drop.Amount.Value == 0
         
-                TweenFunctionV(275, plane11.PrimaryPart, oldpos2)
+                TweenFunctionV(250, plane11.PrimaryPart, oldpos2)
         
                 loopTelAir:Disconnect()
             else
@@ -785,7 +785,7 @@ local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
             end)
 
             plane111.PrimaryPart.Anchored = false
-            TweenFunctionV(275, plane111.PrimaryPart, Vector3.new(plane111.PrimaryPart.Position.X, calculate(feetvalue), plane111.PrimaryPart.Position.Z))
+            TweenFunctionV(250, plane111.PrimaryPart, Vector3.new(plane111.PrimaryPart.Position.X, calculate(feetvalue), plane111.PrimaryPart.Position.Z))
             plane111.PrimaryPart.Anchored = true
         end
     elseif not state then
@@ -798,7 +798,7 @@ local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
         if oldpos250 ~= nil then
             toggleFarmMinutes = false
             plane111.PrimaryPart.Anchored = false
-            TweenFunctionV(275, plane111.PrimaryPart, oldpos250)
+            TweenFunctionV(250, plane111.PrimaryPart, oldpos250)
             loopTelAirFarmMin:Disconnect()
         end
     end
