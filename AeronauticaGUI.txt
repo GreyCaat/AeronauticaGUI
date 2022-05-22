@@ -684,6 +684,12 @@ local FullBright = misc:CreateToggle("Always day", function(state)
 end)
 
 
+local lineLockPlaneFasterPlane = misc:CreateLine()
+
+
+local TextFasterPlane = misc:CreateLabel("Use these 2 below to farm minutes")
+
+
 local AntiAfk = misc:CreateToggle("Anti Afk", function(state)
     if state then
         ToggleAntiAfk = true
@@ -730,92 +736,7 @@ local LockPlane = misc:CreateToggle("Lock Plane", function(state)
 end)
 
 
-local lineLockFarmMin = misc:CreateLine()
-
-
-local TextFarmMinutes = misc:CreateLabel("Takeoff first, then turn on")
-
-
-local oldpos250;
-local toggleFarmMinutes = false
-local loopTelAirFarmMin;
-local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
-    local PlayerName = tostring(game.Players.LocalPlayer)
-    local plane111;
-
-    if state then
-        local counter = 0
-
-        for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-            counter = counter + 1
-        end
-
-        if counter == 1 then
-            game.StarterGui:SetCore("SendNotification", {
-                Title = "Info";
-                Text = "You need to be spawned in";
-                Button1 = "Understood";
-                Duration = math.huge
-            })
-        else
-            toggleFarmMinutes = true
-
-            for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                if v.Name == "Head" then
-                else
-                    plane111 = v
-                    oldpos250 = v.PrimaryPart.Position
-                end
-            end
-
-            local function calculate(feet)
-                local calc = feet / 25
-                return calc
-            end
-    
-            local feetvalue = plane111.Specifications.ServiceCeiling.Value
-    
-            loopTelAirFarmMin = game:GetService("RunService").RenderStepped:Connect(function()
-                local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
-                plane111.PrimaryPart.CFrame = CFrame.new(plane111.PrimaryPart.Position) * rotaion
-            end)
-
-            for a, b in pairs(plane111:GetDescendants()) do
-                if b:IsA("Part") or b:IsA("MeshPart") then
-                    if b:FindFirstChild("WeldConst") then
-                    else
-                        local con = Instance.new("WeldConstraint")
-                        con.Name = "WeldConst"
-                        con.Parent = plane111.PrimaryPart
-                        con.Part0 = b
-                        con.Part1 = plane111.PrimaryPart
-                        con.Enabled = true
-                    end
-                end
-            end
-
-            plane111.PrimaryPart.Anchored = false
-            TweenFunctionV(250, plane111.PrimaryPart, Vector3.new(plane111.PrimaryPart.Position.X, calculate(feetvalue), plane111.PrimaryPart.Position.Z))
-            plane111.PrimaryPart.Anchored = true
-        end
-    elseif not state then
-        for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-            if v.Name == "Head" then
-            else
-                plane111 = v
-            end
-        end
-        if oldpos250 ~= nil then
-            toggleFarmMinutes = false
-            plane111.PrimaryPart.Anchored = false
-            TweenFunctionV(250, plane111.PrimaryPart, oldpos250)
-            loopTelAirFarmMin:Disconnect()
-        end
-    end
-end)
-
-
-local lineFarmMinFasterPlane = misc:CreateLine()
+local lineLockPlaneFasterPlane = misc:CreateLine()
 
 
 local TextFasterPlane = misc:CreateLabel("Takeoff first, then turn on")
