@@ -303,22 +303,26 @@ for i, v in pairs(game:GetService("Workspace").GrandWorkspace.SpawnPoints:GetChi
             local feetvalue = plane.Specifications.ServiceCeiling.Value
 
             loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-                local PlayerName = tostring(game.Players.LocalPlayer)
-                local hello
-
-                for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                    if v.Name == "Head" then
-                    else
-                        hello = v
-                    end
-                end
-
-                if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+                if plane.PrimaryPart.FlyScript.Stall.Value == true then
+                    plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+                else
+                    plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
                 end
             end)
+
+            for a, b in pairs(plane:GetDescendants()) do
+                if b:IsA("Part") or b:IsA("MeshPart") then
+                    if b:FindFirstChild("WeldConst") then
+                    else
+                        local con = Instance.new("WeldConstraint")
+                        con.Name = "WeldConst"
+                        con.Parent = plane.PrimaryPart
+                        con.Part0 = b
+                        con.Part1 = plane.PrimaryPart
+                        con.Enabled = true
+                    end
+                end
+            end
 
             TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
             
@@ -375,22 +379,26 @@ local loadpos = Teleports:CreateButton("Load Position", function()
         local feetvalue = plane.Specifications.ServiceCeiling.Value
 
         loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-            local PlayerName = tostring(game.Players.LocalPlayer)
-            local hello
-
-            for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                if v.Name == "Head" then
-                else
-                    hello = v
-                end
-            end
-
-            if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-            elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+            if plane.PrimaryPart.FlyScript.Stall.Value == true then
+                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+            else
+                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
             end
         end)
+
+        for a, b in pairs(plane:GetDescendants()) do
+            if b:IsA("Part") or b:IsA("MeshPart") then
+                if b:FindFirstChild("WeldConst") then
+                else
+                    local con = Instance.new("WeldConstraint")
+                    con.Name = "WeldConst"
+                    con.Parent = plane.PrimaryPart
+                    con.Part0 = b
+                    con.Part1 = plane.PrimaryPart
+                    con.Enabled = true
+                end
+            end
+        end
 
         TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
         
@@ -445,22 +453,26 @@ local TpToWaypoint = Routes:CreateButton("Tp to marker", function()
         local feetvalue = plane.Specifications.ServiceCeiling.Value
 
         loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-            local PlayerName = tostring(game.Players.LocalPlayer)
-            local hello
-
-            for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                if v.Name == "Head" then
-                else
-                    hello = v
-                end
-            end
-
-            if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-            elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+            if plane.PrimaryPart.FlyScript.Stall.Value == true then
+                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+            else
+                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
             end
         end)
+
+        for a, b in pairs(plane:GetDescendants()) do
+            if b:IsA("Part") or b:IsA("MeshPart") then
+                if b:FindFirstChild("WeldConst") then
+                else
+                    local con = Instance.new("WeldConstraint")
+                    con.Name = "WeldConst"
+                    con.Parent = plane.PrimaryPart
+                    con.Part0 = b
+                    con.Part1 = plane.PrimaryPart
+                    con.Enabled = true
+                end
+            end
+        end
 
         TweenFunctionV(250, plane.PrimaryPart, Vector3.new(plane.PrimaryPart.Position.X, calculate(feetvalue), plane.PrimaryPart.Position.Z))
         
@@ -519,22 +531,26 @@ local TpToWaypointLoop = Routes:CreateToggle("Tp to marker (loop)", function(sta
             end
         
             loopTelAir111 = game:GetService("RunService").RenderStepped:Connect(function()
-                local PlayerName = tostring(game.Players.LocalPlayer)
-                local hello
-    
-                for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                    if v.Name == "Head" then
-                    else
-                        hello = v
-                    end
-                end
-    
-                if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+                if plane4.PrimaryPart.FlyScript.Stall.Value == true then
+                    plane4.PrimaryPart.CFrame = plane4.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+                else
+                    plane4.PrimaryPart.CFrame = plane4.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
                 end
             end)
+
+            for a, b in pairs(plane4:GetDescendants()) do
+                if b:IsA("Part") or b:IsA("MeshPart") then
+                    if b:FindFirstChild("WeldConst") then
+                    else
+                        local con = Instance.new("WeldConstraint")
+                        con.Name = "WeldConst"
+                        con.Parent = plane4.PrimaryPart
+                        con.Part0 = b
+                        con.Part1 = plane4.PrimaryPart
+                        con.Enabled = true
+                    end
+                end
+            end
 
             local function calculate(feet)
                 local calc = feet / 25
@@ -622,22 +638,26 @@ local TpToWaypointLoopHeightLock = Routes:CreateButton("Complete Supply Drop", f
                 local feetvalue = plane11.Specifications.ServiceCeiling.Value
         
                 loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-                    local PlayerName = tostring(game.Players.LocalPlayer)
-                    local hello
-        
-                    for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                        if v.Name == "Head" then
-                        else
-                            hello = v
-                        end
-                    end
-        
-                    if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                        hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-50), 0, 0)
-                    elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                        hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+                    if plane11.PrimaryPart.FlyScript.Stall.Value == true then
+                        plane11.PrimaryPart.CFrame = plane11.PrimaryPart.CFrame * CFrame.Angles(math.rad(-50), 0, 0)
+                    else
+                        plane11.PrimaryPart.CFrame = plane11.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
                     end
                 end)
+
+                for i, v in pairs(plane11:GetDescendants()) do
+                    if v:IsA("Part") or v:IsA("MeshPart") then
+                        if v:FindFirstChild("WeldConst") then
+                        else
+                            local con = Instance.new("WeldConstraint")
+                            con.Name = "WeldConst"
+                            con.Parent = plane11.PrimaryPart
+                            con.Part0 = v
+                            con.Part1 = plane11.PrimaryPart
+                            con.Enabled = true
+                        end
+                    end
+                end
         
                 TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(plane11.PrimaryPart.Position.X, calculate(feetvalue), plane11.PrimaryPart.Position.Z))
 
@@ -771,22 +791,26 @@ local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
             local feetvalue = plane111.Specifications.ServiceCeiling.Value
     
             loopTelAirFarmMin = game:GetService("RunService").RenderStepped:Connect(function()
-                local PlayerName = tostring(game.Players.LocalPlayer)
-                local hello
-    
-                for i, v in pairs(game.Workspace[PlayerName]:GetChildren()) do
-                    if v.Name == "Head" then
-                    else
-                        hello = v
-                    end
-                end
-    
-                if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
-                    hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
+                if plane111.PrimaryPart.FlyScript.Stall.Value == true then
+                    plane111.PrimaryPart.CFrame = plane111.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+                else
+                    plane111.PrimaryPart.CFrame = plane111.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
                 end
             end)
+
+            for a, b in pairs(plane111:GetDescendants()) do
+                if b:IsA("Part") or b:IsA("MeshPart") then
+                    if b:FindFirstChild("WeldConst") then
+                    else
+                        local con = Instance.new("WeldConstraint")
+                        con.Name = "WeldConst"
+                        con.Parent = plane111.PrimaryPart
+                        con.Part0 = b
+                        con.Part1 = plane111.PrimaryPart
+                        con.Enabled = true
+                    end
+                end
+            end
 
             plane111.PrimaryPart.Anchored = false
             TweenFunctionV(250, plane111.PrimaryPart, Vector3.new(plane111.PrimaryPart.Position.X, calculate(feetvalue), plane111.PrimaryPart.Position.Z))
@@ -853,7 +877,7 @@ local FasterPlane = misc:CreateToggle("Faster Plane", function(state)
             loopFasterPlane = game:GetService("RunService").RenderStepped:Connect(function()
                 planefast.Specifications.MaxSpeed.Value = 10000
                 if planefast.PrimaryPart.BodyVelocity.Velocity.X >= calculate(oldmaxspeed + oldmaxspeed / 1.55) then
-                elseif planefast.PrimaryPart.BodyVelocity.Velocity.Y >= calculate(oldmaxspeed + oldmaxspeed / 1.7) then
+                elseif planefast.PrimaryPart.BodyVelocity.Velocity.Y >= calculate(oldmaxspeed + oldmaxspeed / 1.55) then
                 elseif planefast.PrimaryPart.BodyVelocity.Velocity.Z >= calculate(oldmaxspeed + oldmaxspeed / 1.55) then
                 else
                     planefast.PrimaryPart.BodyVelocity.Velocity = planefast.PrimaryPart.BodyVelocity.Velocity * 1.07
