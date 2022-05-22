@@ -633,21 +633,25 @@ local TpToWaypointLoopHeightLock = Routes:CreateButton("Complete Supply Drop", f
                     end
         
                     if hello.PrimaryPart.FlyScript.Stall.Value == true then
-                        hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
+                        hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(-50), 0, 0)
                     elseif hello.PrimaryPart.FlyScript.Stall.Value == false then
                         hello.PrimaryPart.CFrame = hello.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
                     end
                 end)
         
                 TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(plane11.PrimaryPart.Position.X, calculate(feetvalue), plane11.PrimaryPart.Position.Z))
+
+                TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
                 
-                repeat
-                    TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(game:GetService("Workspace").Junk.Guider.Position.X, calculate(feetvalue), game:GetService("Workspace").Junk.Guider.Position.Z))
-                    wait()
+                plane11.PrimaryPart.Anchored = true
+                repeat wait(0.2)
                     plane11.PrimaryPart.FlyScript.ServerMissionScript.Connector:FireServer()
                 until plane11.PrimaryPart.FlyScript.ServerMissionScript.Drop.Amount.Value == 0
+                plane11.PrimaryPart.Anchored = false
         
-                TweenFunctionV(250, plane11.PrimaryPart, oldpos2)
+                TweenFunctionV(250, plane11.PrimaryPart, Vector3.new(oldpos2.X, calculate(feetvalue), oldpos2.Z))
+
+                TweenFunctionV(250, plane11.PrimaryPart, oldpos2 + Vector3.new(0, 50, 0))
         
                 loopTelAir:Disconnect()
             else
