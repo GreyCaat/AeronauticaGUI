@@ -303,11 +303,8 @@ for i, v in pairs(game:GetService("Workspace").GrandWorkspace.SpawnPoints:GetChi
             local feetvalue = plane.Specifications.ServiceCeiling.Value
 
             loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-                if plane.PrimaryPart.FlyScript.Stall.Value == true then
-                    plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                else
-                    plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-                end
+                local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+                plane.PrimaryPart.CFrame = CFrame.new(plane.PrimaryPart.Position) * rotaion
             end)
 
             for a, b in pairs(plane:GetDescendants()) do
@@ -379,11 +376,8 @@ local loadpos = Teleports:CreateButton("Load Position", function()
         local feetvalue = plane.Specifications.ServiceCeiling.Value
 
         loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-            if plane.PrimaryPart.FlyScript.Stall.Value == true then
-                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-            else
-                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-            end
+            local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+            plane.PrimaryPart.CFrame = CFrame.new(plane.PrimaryPart.Position) * rotaion
         end)
 
         for a, b in pairs(plane:GetDescendants()) do
@@ -453,11 +447,8 @@ local TpToWaypoint = Routes:CreateButton("Tp to marker", function()
         local feetvalue = plane.Specifications.ServiceCeiling.Value
 
         loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-            if plane.PrimaryPart.FlyScript.Stall.Value == true then
-                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-            else
-                plane.PrimaryPart.CFrame = plane.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-            end
+            local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+            plane.PrimaryPart.CFrame = CFrame.new(plane.PrimaryPart.Position) * rotaion
         end)
 
         for a, b in pairs(plane:GetDescendants()) do
@@ -531,11 +522,8 @@ local TpToWaypointLoop = Routes:CreateToggle("Tp to marker (loop)", function(sta
             end
         
             loopTelAir111 = game:GetService("RunService").RenderStepped:Connect(function()
-                if plane4.PrimaryPart.FlyScript.Stall.Value == true then
-                    plane4.PrimaryPart.CFrame = plane4.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                else
-                    plane4.PrimaryPart.CFrame = plane4.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-                end
+                local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+                plane4.PrimaryPart.CFrame = CFrame.new(plane4.PrimaryPart.Position) * rotaion
             end)
 
             for a, b in pairs(plane4:GetDescendants()) do
@@ -638,11 +626,8 @@ local TpToWaypointLoopHeightLock = Routes:CreateButton("Complete Supply Drop", f
                 local feetvalue = plane11.Specifications.ServiceCeiling.Value
         
                 loopTelAir = game:GetService("RunService").RenderStepped:Connect(function()
-                    if plane11.PrimaryPart.FlyScript.Stall.Value == true then
-                        plane11.PrimaryPart.CFrame = plane11.PrimaryPart.CFrame * CFrame.Angles(math.rad(-50), 0, 0)
-                    else
-                        plane11.PrimaryPart.CFrame = plane11.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-                    end
+                    local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+                    plane11.PrimaryPart.CFrame = CFrame.new(plane11.PrimaryPart.Position) * rotaion
                 end)
 
                 for i, v in pairs(plane11:GetDescendants()) do
@@ -791,11 +776,8 @@ local FarmMinutes = misc:CreateToggle("Farm Minutes", function(state)
             local feetvalue = plane111.Specifications.ServiceCeiling.Value
     
             loopTelAirFarmMin = game:GetService("RunService").RenderStepped:Connect(function()
-                if plane111.PrimaryPart.FlyScript.Stall.Value == true then
-                    plane111.PrimaryPart.CFrame = plane111.PrimaryPart.CFrame * CFrame.Angles(math.rad(-90), 0, 0)
-                else
-                    plane111.PrimaryPart.CFrame = plane111.PrimaryPart.CFrame * CFrame.Angles(math.rad(50), 0, 0)
-                end
+                local rotaion = CFrame.Angles(math.deg(-90), math.deg(0), math.deg(0))
+                plane111.PrimaryPart.CFrame = CFrame.new(plane111.PrimaryPart.Position) * rotaion
             end)
 
             for a, b in pairs(plane111:GetDescendants()) do
