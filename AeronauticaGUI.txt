@@ -194,7 +194,7 @@ end)
 function RemoveParts(plane, Collide)
     for i, v in pairs(plane:GetChildren()) do
         if v:IsA("Part") or v:IsA("MeshPart") then
-            if string.find(v.Name, "Color") or v.Name == "ServoPart" then
+            if not string.find(v.Name, "Collision") and v.Name ~= plane.PrimaryPart.Name then
                 v:Destroy()
             elseif string.find(v.Name, "Collision") then
                 v.Color = Color3.fromRGB(190, 190, 190)
