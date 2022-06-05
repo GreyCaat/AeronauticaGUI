@@ -280,6 +280,7 @@ local LoopCollectCrates = Crates:CreateToggle("Collect Crates", function(state)
                         spawn(function()
                             repeat wait()
                                 if loopCrates == false then
+                                    v.CanCollide = false
                                     v.Position = oldpos
                                 end
                             until loopCrates == false
