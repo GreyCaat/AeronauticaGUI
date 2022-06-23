@@ -4,6 +4,16 @@ getgenv().ToggleWayLoop = false
 getgenv().ToggleFullBright = false
 
 -----------------------------------------------------------------------------------------------------------------------
+--suck it, RandomString
+local abc = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","z"}
+local letters = math.random(5, 15)
+local RandomString = ""
+for i=1, letters do
+    local randomabc = math.random(1, 25)
+    RandomString = RandomString.. abc[randomabc]
+end
+
+-----------------------------------------------------------------------------------------------------------------------
 --CrateEsp
 local Name = tostring(game.Players.LocalPlayer)
 local camera = workspace.CurrentCamera
@@ -25,8 +35,8 @@ local function DrawDrop(drop)
 
     local Part = Instance.new("Part")
     Part.Size = Vector3.new(0.1, 0.1, 0.1)
-    Part.Name = "Yes"
     Part.Transparency = 1
+    Part.Name = RandomString
     Part.Anchored = true
     Part.Parent = drop
     Part.CanCollide = false
@@ -128,7 +138,7 @@ spawn(function()
     while wait(10) do
         for i,drop in pairs(game:GetService("Workspace").GrandWorkspace.Scenery.KitCrates:GetDescendants()) do
             if drop.Name == "CratePart" then
-                if drop:FindFirstChild("Yes") then
+                if drop:FindFirstChild(RandomString) then
                 else    
                     coroutine.wrap(DrawDrop)(drop)
                 end
